@@ -1,0 +1,54 @@
+<html>
+ <script src="processing.js"></script>
+ <script type="text/processing" data-processing-target="display">
+
+var width = 401;
+var height = 300;
+var bgcolor = 77;
+var fontsize = 14;
+var string = "Hello Worlds!";
+
+var x = 20;
+var y = 20;
+
+var dx = 1;
+var dy = 1;
+
+void setup() {
+  size(width, height);
+  background(bgcolor);
+  fill(255);
+  PFont fontA = loadFont("courier");
+  textFont(fontA, fontsize);
+}
+
+void draw() {
+  x += dx;
+	// TODO(kevindamm): get more accurate metrics on the string.
+	var textwidth = fontsize / 2 * string.length;
+  if (x >= width - textwidth) {
+    x = width - textwidth - dx;
+    dx = -dx;
+  } else if (x < 0) {
+		dx = -dx;
+		x = dx;
+	}
+  y += dy;
+  if (y >= height) {
+    y = height - dy;
+    dy = -dy;
+  } else if (y < fontsize) {
+		dy = -dy;
+		y = fontsize;
+	}	
+	background(bgcolor);
+  text(string, x, y);
+  println("Hello ERR log!");
+}
+
+ </script>
+</head>
+<body>
+ <canvas id="display"></canvas>
+</body>
+</html>
